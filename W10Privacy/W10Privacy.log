@@ -1,0 +1,71 @@
+2019-10-11  10:17:13,639 : ________
+2019-10-11  10:17:13,655 : Starte W10Privacy v.3.3.1.0 im Gui-Modus - WIN_10 [1903] 
+2019-10-11  10:17:13,655 : W10Privacy wurde über den Benutzer <drago> gestartet.
+2019-10-11  10:17:13,670 : Administrativer Kontext erkannt, es können auch systemspezifische Einstellungen angepasst werden.
+2019-10-11  10:17:14,045 : Beginne die Ermittlung der Aufgaben...
+2019-10-11  10:17:14,451 : Ermittlung der Aufgaben abgeschlossen.
+2019-10-11  10:17:14,451 : Beginne die Ermittlung der System-Apps...
+2019-10-11  10:17:17,560 : Ermittlung der System-Apps abgeschlossen.
+2019-10-11  10:17:17,576 : Beginne die Ermittlung der Benutzer-Apps...
+2019-10-11  10:17:25,792 : Ermittlung der Benutzer-Apps abgeschlossen.
+2019-10-11  10:17:25,792 : Beginne die Ermittlung der Firewall-Regeln...
+2019-10-11  10:17:27,761 : Ermittlung der Firewall-Regeln abgeschlossen.
+2019-10-11  10:17:37,711 : Beginne die Ermittlung der Namen der System-Apps für die Firewall-Regeln...
+2019-10-11  10:17:38,774 : Ermittlung der Namen der System-Apps für die Firewall-Regeln abgeschlossen.
+2019-10-11  10:18:30,385 : Fehler beim Einlesen der Datei <Get-WUInstall.ps1>, kann Einstellung nicht einlesen!
+2019-10-11  10:19:09,141 : Führe Anpassungen an PowerShell-Scripten aus, damit diese von W10Privacy verwendet werden können.
+2019-10-11  10:19:09,391 : Fake-WSUS-Server wird nun hinterlegt, <Windows Update> kann vom System zur Suche nach Updates nicht mehr erreicht werden!
+2019-10-11  10:19:09,672 : Dienst <wuauserv> wird gestoppt...
+2019-10-11  10:19:12,265 : The Windows Update service is stopping.
+2019-10-11  10:19:12,265 : The Windows Update service was stopped successfully.
+2019-10-11  10:19:12,469 : Dienst <cryptsvc> wird gestoppt...
+2019-10-11  10:19:17,577 : The Cryptographic Services service is stopping...
+2019-10-11  10:19:17,577 : The Cryptographic Services service was stopped successfully.
+2019-10-11  10:19:18,123 : Dienst <bits> wird gestartet...
+2019-10-11  10:19:20,217 : The Background Intelligent Transfer Service service is starting.
+2019-10-11  10:19:20,217 : The Background Intelligent Transfer Service service was started successfully.
+2019-10-11  10:19:20,342 : Dienst <wuauserv> wird gestartet...
+2019-10-11  10:19:22,419 : The Windows Update service is starting.
+2019-10-11  10:19:22,419 : The Windows Update service was started successfully.
+2019-10-11  10:19:22,544 : Dienst <appidsvc> wird gestartet...
+2019-10-11  10:19:24,716 : The Application Identity service is starting.
+2019-10-11  10:19:24,731 : The Application Identity service was started successfully.
+2019-10-11  10:19:24,919 : Ermittelter WSUS-Clientordner: c:\Windows\winsxs\amd64_microsoft-windows-w..wsupdateclient-core_31bf3856ad364e35_10.0.18362.1_none_813fcce426d1e811\
+2019-10-11  10:19:26,075 : Starte Script zum Aufbau des Kontates zum WSUS-Server...
+2019-10-11  10:19:27,262 : Suche nach Treibern wird bei der Suche nach Windows Updates deaktiviert.
+2019-10-11  10:19:28,090 : Setzen der ExecutionPolicy <Unrestricted> für PowerShell-Scripte.
+2019-10-11  10:19:28,418 : Prüfe auf ausstehenden Neustart über das PSWindowsUpdate-Modul.
+2019-10-11  10:19:35,599 : Fehler beim Einlesen der Ausgabedatei, Reboot-Status kann über PSWindowsUpdate nicht ermittelt werden!
+2019-10-11  10:19:35,606 : Ausstehender Neustart auf Basis des Registry-Keys <HKLM(64)\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing> ermittelt.
+2019-10-11  10:19:35,609 : Ausstehender Neustart aufgrund von Windows-Updates ermittelt, es wird keine Suche nach weiteren Updates durchgeführt.
+2019-10-11  10:19:35,616 : Deaktiviere die ExecutionPolicy <Unrestricted> für PowerShell-Scripte.
+2019-10-11  10:19:40,317 : W10Privacy wird beendet.
+2019-10-11  10:19:45,660 : ________
+2019-10-11  10:19:45,675 : Starte W10Privacy v.3.3.1.0 im Gui-Modus - WIN_10 [1903] 
+2019-10-11  10:19:45,675 : W10Privacy wurde über den Benutzer <drago> gestartet.
+2019-10-11  10:19:45,675 : KEIN administrativer Kontext vorhanden, das Programm kann nur benutzerspezifische Einstellungen ändern.
+2019-10-11  10:19:51,029 : Beginne die Ermittlung der Aufgaben...
+2019-10-11  10:19:51,436 : Ermittlung der Aufgaben abgeschlossen.
+2019-10-11  10:19:51,436 : System-Apps können leider nicht ermittelt werden, angemeldeter Benutzer verfügt nicht über administrative Rechte.
+2019-10-11  10:19:51,451 : Beginne die Ermittlung der Benutzer-Apps...
+2019-10-11  10:19:53,513 : Ermittlung der Benutzer-Apps abgeschlossen.
+2019-10-11  10:19:53,529 : Beginne die Ermittlung der Firewall-Regeln...
+2019-10-11  10:19:54,294 : Ermittlung der Firewall-Regeln abgeschlossen.
+2019-10-11  10:20:02,995 : Beginne die Ermittlung der Namen der System-Apps für die Firewall-Regeln...
+2019-10-11  10:20:05,776 : Ermittlung der Namen der System-Apps für die Firewall-Regeln abgeschlossen.
+2019-10-11  10:20:26,053 : W10Privacy wird beendet.
+2019-10-11  10:20:31,940 : ________
+2019-10-11  10:20:31,940 : Starte W10Privacy v.3.3.1.0 im Gui-Modus - WIN_10 [1903] 
+2019-10-11  10:20:31,956 : W10Privacy wurde über den Benutzer <drago> gestartet.
+2019-10-11  10:20:31,956 : Administrativer Kontext erkannt, es können auch systemspezifische Einstellungen angepasst werden.
+2019-10-11  10:20:32,128 : Beginne die Ermittlung der Aufgaben...
+2019-10-11  10:20:32,503 : Ermittlung der Aufgaben abgeschlossen.
+2019-10-11  10:20:32,503 : Beginne die Ermittlung der System-Apps...
+2019-10-11  10:20:34,190 : Ermittlung der System-Apps abgeschlossen.
+2019-10-11  10:20:34,206 : Beginne die Ermittlung der Benutzer-Apps...
+2019-10-11  10:20:35,877 : Ermittlung der Benutzer-Apps abgeschlossen.
+2019-10-11  10:20:35,893 : Beginne die Ermittlung der Firewall-Regeln...
+2019-10-11  10:20:36,455 : Ermittlung der Firewall-Regeln abgeschlossen.
+2019-10-11  10:20:44,672 : Beginne die Ermittlung der Namen der System-Apps für die Firewall-Regeln...
+2019-10-11  10:20:45,781 : Ermittlung der Namen der System-Apps für die Firewall-Regeln abgeschlossen.
+2019-10-11  10:21:03,011 : W10Privacy wird beendet.
