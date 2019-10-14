@@ -18,7 +18,8 @@ Click Set changed settings
 ```
 
 ## Disclaimer
-I took no part in either of these tools, I just verified these solutions work on the builds above.
-The original RDPWrap can be found [here](https://github.com/stascorp/rdpwrap)
-And the original win10privacy can be found [here](https://www.winprivacy.de/english-home/)
+I took no part in either of these tools, I just verified these solutions work on the builds above.<br>
+The original RDPWrap can be found [here](https://github.com/stascorp/rdpwrap)<br>
+And the original win10privacy can be found [here](https://www.winprivacy.de/english-home/)<br>
+If this works for you, please consider donating to the authors as they made this possible.
 
