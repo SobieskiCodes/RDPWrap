@@ -1,7 +1,7 @@
 # RDPWrap 1.6.2 + win 10 privacy
 
 RDPWrap 1.6.2 for windows 10 home builds v18362.267 through 18362.418, and win10privacy to block windows updates.
-
+UNINSTALL YOUR CURRENT RDPWRAP IF IT IS INSTALLED, REBOOT THE MACHINE BEFORE STARTING THIS.
 ## Setup
 
 
