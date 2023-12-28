@@ -1,6 +1,6 @@
 # RDPWrap + win 10 privacy
 Since so many people still use / find this, I've gone ahead and updated it, @sebaxakerhtc has streamlined the process.
-This repo is using Github actions, watching [sebaxakerhtc's](https://github.com/sebaxakerhtc/rdpwrap/) modified version of RDPWrap & ini file.
+This repo is using Github actions, watching [sebaxakerhtc's](https://github.com/sebaxakerhtc/rdpwrap/) modified version of RDPWrap.
 Included is win10privacy to block windows updates.
 UNINSTALL YOUR CURRENT RDPWRAP IF IT IS INSTALLED, REBOOT THE MACHINE BEFORE STARTING THIS.
 
