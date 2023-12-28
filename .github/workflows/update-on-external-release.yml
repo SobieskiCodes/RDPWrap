@@ -1,0 +1,56 @@
+name: Update on External Release
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs every day at midnight
+
+jobs:
+  update-rdpwrap:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Check for new release in rdpwrap
+      id: check_release
+      run: |
+        latestRelease=$(curl -s https://api.github.com/repos/sebaxakerhtc/rdpwrap/releases/latest)
+        latestTag=$(echo $latestRelease | jq -r .tag_name)
+        echo "Latest release tag: $latestTag"
+        echo "::set-output name=tag::$latestTag"
+
+    - name: Get the latest tag from the repository
+      id: get_latest_tag
+      run: |
+        tag=$(git describe --tags --abbrev=0)
+        if [ -z "$tag" ]; then tag="0.0.0"; fi  # Default if no tags are found
+        echo "::set-output name=latest_tag::$tag"
+
+    - name: Update files in repository
+      if: steps.check_release.outputs.tag != steps.get_latest_tag.outputs.latest_tag
+      run: |
+        # Get the assets download URLs from the latest release
+        assetsUrls=$(echo $latestRelease | jq -r '.assets[] | select(.name | test("RDPW_Installer.exe|RDPW_Uninstaller.exe")) | .browser_download_url')
+        
+        # Download each asset by URL
+        for url in $assetsUrls; do
+          echo "Downloading $url"
+          curl -L $url -o $(basename $url)
+        done
+        
+        # Replace the executables in your repository (adjust paths as necessary)
+        mv RDPW_Installer.exe ./RDPW_Installer.exe
+        mv RDPW_Uninstaller.exe ./repo/RDPW_Uninstaller.exe
+
+        # Commit and push changes
+        git config user.name 'GitHub Action'
+        git config user.email 'action@github.com'
+        git add ./RDPW_Installer.exe ./RDPW_Uninstaller.exe
+        git commit -m "Update executables to ${{ steps.check_release.outputs.tag }}"
+        git push
+
+    - name: Tag the repository
+      run: |
+        git tag ${{ steps.check_release.outputs.tag }}
+        git push origin ${{ steps.check_release.outputs.tag }}
