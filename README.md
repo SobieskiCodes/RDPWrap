@@ -1,8 +1,8 @@
 # RDPWrap + win 10 privacy
-Since so many people still use / find this, I've gone ahead and updated it, @sebaxakerhtc has streamlined the process.
-This repo is using Github actions, watching [sebaxakerhtc's](https://github.com/sebaxakerhtc/rdpwrap/) modified version of RDPWrap.
-Included is win10privacy to block windows updates.
-UNINSTALL YOUR CURRENT RDPWRAP IF IT IS INSTALLED, REBOOT THE MACHINE BEFORE STARTING THIS.
+Since so many people still use / find this, I've gone ahead and updated it, @sebaxakerhtc has streamlined the process.<br>
+This repo is using Github actions, watching [sebaxakerhtc's](https://github.com/sebaxakerhtc/rdpwrap/) modified version of RDPWrap.<br>
+Included is win10privacy to block windows updates.<br>
+UNINSTALL YOUR CURRENT RDPWRAP IF IT IS INSTALLED, REBOOT THE MACHINE BEFORE STARTING THIS.<br>
 
 
 ## Setup
@@ -23,7 +23,7 @@ Enjoy!
 ## Disclaimer
 I took no part in either of these tools.
 The original RDPWrap can be found [here](https://github.com/stascorp/rdpwrap)<br>
-The automated custom RDPWrap used here can be found on [sebaxakerhtc's](https://github.com/sebaxakerhtc/) profile.
+The automated custom RDPWrap used here can be found on [sebaxakerhtc's](https://github.com/sebaxakerhtc/) profile.<br>
 And the original win10privacy can be found [here](https://www.winprivacy.de/english-home/)<br>
-If this works for you, please consider donating to the authors as they made this possible.
+If this works for you, please consider donating to the authors as they made this possible.<br>
 
