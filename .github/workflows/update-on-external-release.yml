@@ -18,17 +18,17 @@ jobs:
         latestRelease=$(curl -s https://api.github.com/repos/sebaxakerhtc/rdpwrap/releases/latest)
         latestTag=$(echo $latestRelease | jq -r .tag_name)
         echo "Latest release tag: $latestTag"
-        echo "::set-output name=tag::$latestTag"
+        echo "tag=$latestTag" >> $GITHUB_ENV
 
     - name: Get the latest tag from the repository
       id: get_latest_tag
       run: |
         tag=$(git describe --tags --abbrev=0)
         if [ -z "$tag" ]; then tag="0.0.0"; fi  # Default if no tags are found
-        echo "::set-output name=latest_tag::$tag"
+        echo "latest_tag=$tag" >> $GITHUB_ENV
 
     - name: Update files in repository
-      if: steps.check_release.outputs.tag != steps.get_latest_tag.outputs.latest_tag
+      if: env.tag != env.latest_tag
       run: |
         # Get the assets download URLs from the latest release
         assetsUrls=$(echo $latestRelease | jq -r '.assets[] | select(.name | test("RDPW_Installer.exe|RDPW_Uninstaller.exe")) | .browser_download_url')
@@ -47,10 +47,10 @@ jobs:
         git config user.name 'GitHub Action'
         git config user.email 'action@github.com'
         git add ./RDPW_Installer.exe ./RDPW_Uninstaller.exe
-        git commit -m "Update executables to ${{ steps.check_release.outputs.tag }}"
+        git commit -m "Update executables to $latestTag"
         git push
 
     - name: Tag the repository
       run: |
-        git tag ${{ steps.check_release.outputs.tag }}
-        git push origin ${{ steps.check_release.outputs.tag }}
+        git tag $latestTag
+        git push origin $latestTag
