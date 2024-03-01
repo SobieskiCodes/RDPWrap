@@ -3,7 +3,7 @@ Since so many people still use / find this, I've gone ahead and updated it, @seb
 This repo is using Github actions, watching [sebaxakerhtc's](https://github.com/sebaxakerhtc/rdpwrap/) modified version of RDPWrap.<br>
 Included is win10privacy to block windows updates.<br>
 UNINSTALL YOUR CURRENT RDPWRAP IF IT IS INSTALLED, REBOOT THE MACHINE BEFORE STARTING THIS.<br>
-
+For those that found this via the youtube video, the branch you see in video can be found [here](https://github.com/SobieskiCodes/RDPWrap/tree/youtube_branch).
 
 ## Setup
 
