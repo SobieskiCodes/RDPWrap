@@ -3,6 +3,7 @@ name: Update on External Release
 on:
   schedule:
     - cron: '0 0 * * *'  # Runs every day at midnight
+  workflow_dispatch:  # Allow manual triggering for testing
 
 jobs:
   update-rdpwrap:
@@ -10,9 +11,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Check for new release in rdpwrap
       id: check_release
@@ -21,38 +23,116 @@ jobs:
         latestTag=$(echo $latestRelease | jq -r .tag_name)
         echo "Latest release tag: $latestTag"
         echo "tag=$latestTag" >> $GITHUB_ENV
+        echo "release_data=$latestRelease" >> $GITHUB_ENV
 
     - name: Get the latest tag from the repository
       id: get_latest_tag
       run: |
-        tag=$(git describe --tags --abbrev=0)
-        if [ -z "$tag" ]; then tag="0.0.0"; fi  # Default if no tags are found
+        git fetch --tags
+        tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "0.0.0")
         echo "latest_tag=$tag" >> $GITHUB_ENV
+        echo "Current repository tag: $tag"
 
     - name: Update files in repository
       if: env.tag != env.latest_tag
       run: |
+        echo "New release detected: ${{ env.tag }} (current: ${{ env.latest_tag }})"
+        
+        # Pull latest changes to avoid conflicts
+        git pull origin main || git pull origin master || true
+        
         # Get the assets download URLs from the latest release
-        assetsUrls=$(echo $latestRelease | jq -r '.assets[] | select(.name | test("RDPW_Installer.exe|RDPW_Uninstaller.exe")) | .browser_download_url')
+        assetsUrls=$(echo '${{ env.release_data }}' | jq -r '.assets[] | select(.name | test("RDPW_Installer.exe|RDPW_Uninstaller.exe")) | .browser_download_url')
+        
+        # Create temp directory for downloads
+        mkdir -p temp_downloads
+        cd temp_downloads
         
         # Download each asset by URL
         for url in $assetsUrls; do
           echo "Downloading $url"
-          curl -L $url -o $(basename $url)
+          curl -L "$url" -o "$(basename "$url")"
         done
         
-        # Replace the executables in your repository (adjust paths as necessary)
-        mv RDPW_Installer.exe ./RDPW_Installer.exe
-        mv RDPW_Uninstaller.exe ./repo/RDPW_Uninstaller.exe
+        # Move back to root and replace files
+        cd ..
+        
+        # Replace the executables in your repository
+        if [ -f "temp_downloads/RDPW_Installer.exe" ]; then
+          mv temp_downloads/RDPW_Installer.exe ./RDPW_Installer.exe
+          echo "Updated RDPW_Installer.exe"
+        fi
+        
+        if [ -f "temp_downloads/RDPW_Uninstaller.exe" ]; then
+          # Create repo directory if it doesn't exist
+          mkdir -p repo
+          mv temp_downloads/RDPW_Uninstaller.exe ./repo/RDPW_Uninstaller.exe
+          echo "Updated RDPW_Uninstaller.exe"
+        fi
+        
+        # Clean up temp directory
+        rm -rf temp_downloads
 
-        # Commit and push changes
+        # Configure git
         git config user.name 'GitHub Action'
         git config user.email 'action@github.com'
-        git add ./RDPW_Installer.exe ./RDPW_Uninstaller.exe
-        git commit -m "Update executables to $latestTag"
-        git push
+        
+        # Check if there are any changes to commit
+        if git diff --quiet && git diff --cached --quiet; then
+          echo "No changes detected, skipping commit"
+          echo "skip_commit=true" >> $GITHUB_ENV
+        else
+          # Add and commit changes
+          git add .
+          git commit -m "Update executables to ${{ env.tag }}"
+          
+          # Try to push with retry logic
+          max_attempts=3
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            echo "Push attempt $attempt of $max_attempts"
+            if git push; then
+              echo "Push successful"
+              break
+            else
+              if [ $attempt -lt $max_attempts ]; then
+                echo "Push failed, pulling latest changes and retrying..."
+                git pull --rebase origin main || git pull --rebase origin master || true
+                attempt=$((attempt + 1))
+              else
+                echo "Push failed after $max_attempts attempts"
+                exit 1
+              fi
+            fi
+          done
+        fi
 
     - name: Tag the repository
+      if: env.tag != env.latest_tag && env.skip_commit != 'true'
       run: |
-        git tag $latestTag
-        git push origin $latestTag
+        # Check if tag already exists
+        if git rev-parse "${{ env.tag }}" >/dev/null 2>&1; then
+          echo "Tag ${{ env.tag }} already exists, skipping tag creation"
+        else
+          git tag ${{ env.tag }}
+          
+          # Try to push tag with retry logic
+          max_attempts=3
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            echo "Tag push attempt $attempt of $max_attempts"
+            if git push origin ${{ env.tag }}; then
+              echo "Tag push successful"
+              break
+            else
+              if [ $attempt -lt $max_attempts ]; then
+                echo "Tag push failed, retrying..."
+                sleep 2
+                attempt=$((attempt + 1))
+              else
+                echo "Tag push failed after $max_attempts attempts"
+                exit 1
+              fi
+            fi
+          done
+        fi
